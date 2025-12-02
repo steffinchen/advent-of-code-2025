@@ -1,0 +1,21 @@
+{
+  "name": "aoc-2025",
+  "version": "0.0.1",
+  "type": "module",
+  "description": "Advent of Code 2025",
+  "author": "steffinchen",
+  "license": "ISC",
+  "scripts": {
+    "start": "ts-node --esm src/index.ts",
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "@types/lodash": "4.17.21",
+    "ts-node": "10.9.2",
+    "tsc": "2.0.4",
+    "typescript": "5.9.3"
+  },
+  "dependencies": {
+    "lodash": "4.17.21"
+  }
+}
