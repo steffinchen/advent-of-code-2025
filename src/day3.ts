@@ -3,33 +3,30 @@ import { isEquals, sum } from './helper.js';
 
 export class Day3 implements Day {
   part1 = (input: string[]) => {
-    return input.map((line) => this.findLargest(line)).reduce(sum, 0);
+    return input.map((line) => this.findXLargest(line, 2)).reduce(sum, 0);
   };
 
   part2 = (input: string[]) => {
-    return 0;
+    return input.map((line) => this.findXLargest(line, 12)).reduce(sum, 0);
   };
 
-  findLargest = (line: string) => {
+  findXLargest = (line: string, x: number) => {
     const chars = line.split('');
-    let d1 = '.';
-    let i1 = -1;
-    for (let i = 0; i < chars.length - 1; i++) {
-      if (chars[i] > d1) {
-        d1 = chars[i];
-        i1 = i;
-      }
-    }
+    let digits = [];
+    let prevIndex = -1;
 
-    let d2 = '.';
-    let i2 = -1;
-    for (let i = i1 + 1; i < chars.length; i++) {
-      if (chars[i] > d2) {
-        d2 = chars[i];
-        i2 = i;
+    for (let c = 0; c < x; c++) {
+      let d = '.';
+      for (let i = prevIndex + 1; i <= chars.length - x + c; i++) {
+        if (chars[i] > d) {
+          d = chars[i];
+          prevIndex = i;
+        }
       }
+      digits.push(d);
+      d = '.';
     }
-    return parseInt(d1 + d2);
+    return parseInt(digits.join(''));
   };
 
   testPart1 = () => {
@@ -44,8 +41,13 @@ export class Day3 implements Day {
   };
 
   testPart2 = () => {
-    const example: string[] = [];
+    const example: string[] = [
+      '987654321111111',
+      '811111111111119',
+      '234234234234278',
+      '818181911112111',
+    ];
     const sampleResult = this.part2(example);
-    isEquals(42, sampleResult);
+    isEquals(3121910778619, sampleResult);
   };
 }
