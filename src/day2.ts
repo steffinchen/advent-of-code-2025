@@ -1,6 +1,6 @@
-import _ from 'lodash';
-import { Day } from './day.type.js';
-import { isEquals, isFalsy, isTruthy } from './helper.js';
+import _ from "lodash";
+import { Day } from "./day.type.js";
+import { isEquals, isFalsy, isTruthy } from "./helper.js";
 
 export class Day2 implements Day {
   part1 = (input: string[]) => {
@@ -12,21 +12,15 @@ export class Day2 implements Day {
   };
 
   process = (input: string[], predicate: (value: number) => boolean) => {
-    return (
-      input[0]
-        .split(',')
-        .map((range) => {
-          const s = range.split('-');
-          return { from: Number.parseInt(s[0]), to: Number.parseInt(s[1]) };
-        })
-        .flatMap((range) => _.range(range.from, range.to + 1))
-        .filter(predicate)
-        // .map((v) => {
-        //   console.log('invalid', v);
-        //   return v;
-        // })
-        .reduce((sum, v) => sum + v, 0)
-    );
+    return input[0]
+      .split(",")
+      .map((range) => {
+        const s = range.split("-");
+        return { from: Number.parseInt(s[0]), to: Number.parseInt(s[1]) };
+      })
+      .flatMap((range) => _.range(range.from, range.to + 1))
+      .filter(predicate)
+      .reduce((sum, v) => sum + v, 0);
   };
 
   isInvalid = (n: number): boolean => {
@@ -41,7 +35,7 @@ export class Day2 implements Day {
 
   isInvalid2 = (n: number): boolean => {
     const s = n.toString();
-    if (s.match('^(.)\\1{1,}$')) {
+    if (s.match("^(.)\\1{1,}$")) {
       return true;
     }
 
@@ -64,7 +58,7 @@ export class Day2 implements Day {
     isFalsy(this.isInvalid(101));
 
     const example: string[] = [
-      '11-22,95-115,998-1012,1188511880-1188511890,222220-222224,1698522-1698528,446443-446449,38593856-38593862,565653-565659,824824821-824824827,2121212118-2121212124',
+      "11-22,95-115,998-1012,1188511880-1188511890,222220-222224,1698522-1698528,446443-446449,38593856-38593862,565653-565659,824824821-824824827,2121212118-2121212124",
     ];
     isEquals(1227775554, this.part1(example));
   };
@@ -76,7 +70,7 @@ export class Day2 implements Day {
     isTruthy(this.isInvalid2(1111111));
 
     const example: string[] = [
-      '11-22,95-115,998-1012,1188511880-1188511890,222220-222224,1698522-1698528,446443-446449,38593856-38593862,565653-565659,824824821-824824827,2121212118-2121212124',
+      "11-22,95-115,998-1012,1188511880-1188511890,222220-222224,1698522-1698528,446443-446449,38593856-38593862,565653-565659,824824821-824824827,2121212118-2121212124",
     ];
     isEquals(4174379265, this.part2(example));
   };

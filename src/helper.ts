@@ -14,3 +14,5 @@ export const isFalsy = (expected: boolean) => {
     throw new Error(`Expected value to be truthy`);
   }
 };
+
+export const sum = (sum: number, n: number) => sum + n;

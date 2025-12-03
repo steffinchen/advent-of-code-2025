@@ -1,4 +1,5 @@
 import { Day } from './day.type.js';
+import { isEquals } from './helper.js';
 
 export class Day1 implements Day {
   part1 = (input: string[]) => {
@@ -12,14 +13,12 @@ export class Day1 implements Day {
   testPart1 = () => {
     const example: string[] = [];
     const sampleResult = this.part1(example);
-    if (sampleResult !== 42)
-      throw new Error(`Test result is not as expected: ${sampleResult}`);
+    isEquals(42, sampleResult);
   };
 
   testPart2 = () => {
     const example: string[] = [];
     const sampleResult = this.part2(example);
-    if (sampleResult !== 42)
-      throw new Error(`Test result is not as expected: ${sampleResult}`);
+    isEquals(42, sampleResult);
   };
 }
