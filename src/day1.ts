@@ -1,6 +1,5 @@
 import exp from 'constants';
 import { Day } from './day.type';
-import { expectEquals } from './helper.js';
 import _ from 'lodash';
 
 export class Day1 implements Day {
