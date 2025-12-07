@@ -48,7 +48,10 @@ export class Day7 implements Day {
   countSplittersBeingHit(grid: string[][]) {
     let count = 1; // the first splitter
 
-    for (let row = 0; row < grid.length; row++) {
+    for (let row = 3; row < grid.length; row++) {
+      if (grid[row].join('').match(/^\.+$/g)) {
+        continue;
+      }
       for (let col = 0; col < grid[row].length; col++) {
         if (grid[row][col] === '^' && this.isSplitterBeingHit(row, col, grid)) {
           count++;
@@ -64,22 +67,16 @@ export class Day7 implements Day {
     // ..if an S is in the same colum above it, with nothing inbetween, or
     // ..if if another splitter is to the right or left above and the one directly above is higher up
 
-    let left = -1,
-      above = -1,
-      right = -1;
     for (let i = row - 1; i > 0; i--) {
-      if (left == -1 && this.get(grid, i, col - 1) === '^') {
-        left = i;
-      } else if (above == -1 && this.get(grid, i, col) === '^') {
-        above = i;
-      } else if (right == -1 && this.get(grid, i, col + 1) === '^') {
-        right = i;
-      }
-      if (left != -1 && right != -1 && above != -1) {
-        break;
+      if (this.get(grid, i, col - 1) === '^') {
+        return true;
+      } else if (this.get(grid, i, col + 1) === '^') {
+        return true;
+      } else if (this.get(grid, i, col) === '^') {
+        return false;
       }
     }
-    return left > above || right > above;
+    return false;
   }
 
   get(grid: string[][], i: number, j: number) {
